@@ -1,3 +1,4 @@
+<?php ini_set( 'display_errors', 'On' ); ?>
 <?php include( '../includes/header.php' ); ?>
 
 <?php

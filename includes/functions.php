@@ -24,7 +24,7 @@ function find_pages_for_subject( $subject_id ) {
     $query  = "SELECT * ";
     $query .= "FROM pages ";
     $query .= "WHERE visible = 1 ";
-    $query .= "AND subject_id = $subject_id";
+    $query .= "AND subject_id = $subject_id ";
     $query .= "ORDER BY position ASC";
     $page_set = mysqli_query( $db, $query );
     confirm_query( $page_set ); // in the functions.php file
@@ -43,7 +43,7 @@ function navigation( $subject_id, $page_id ) {
     while( $subject = mysqli_fetch_assoc( $subject_set ) ) : 
 
         $output .= '<li'; 
-        if ( $subject[ 'id' ] == $selected_subject_id ) {
+        if ( $subject[ 'id' ] == $subject_id ) {
             $output .= ' class="selected"';
         } 
         $output .= '>';
@@ -54,12 +54,12 @@ function navigation( $subject_id, $page_id ) {
         $output .= $subject[ 'menu_name' ];
         $output .= '</a>';
         
-        find_pages_for_subject( $subject[ 'id' ];
+        $page_set = find_pages_for_subject( $subject[ 'id' ] );
         $output .= '<ul class="pages">';
         while( $page = mysqli_fetch_assoc( $page_set ) ) :
                                
             $output .= '<li'; 
-            if ( $page[ 'id' ] == $selected_page_id ) {
+            if ( $page[ 'id' ] == $page_id ) {
                 $output .= ' class="selected"';
             } 
             $output .= '>';

@@ -1,0 +1,37 @@
+CREATE TABLE subjects (
+	id INT(11) NOT NULL AUTO_INCREMENT,
+	menu_name VARCHAR(30) NOT NULL,
+	position INT(3) NOT NULL,
+	visible TINYINT(1) NOT NULL,
+	PRIMARY KEY (id)
+);
+INSERT INTO subjects (menu_name, position, visible)
+	VALUES ('About', 1, 1);
+INSERT INTO subjects (menu_name, position, visible)
+	VALUES ('Products', 2, 1);
+INSERT INTO subjects (menu_name, position, visible)
+	VALUES ('Services', 3, 1);
+INSERT INTO subjects (menu_name, position, visible)
+	VALUES ('Misc', 4, 0);
+CREATE TABLE pages (
+	id INT(11) NOT NULL AUTO_INCREMENT,
+	subject_id INT(11) NOT NULL,
+	menu_name VARCHAR(30) NOT NULL,
+	position INT(3) NOT NULL,
+	visible TINYINT(1) NOT NULL,
+	content TEXT,
+	PRIMARY KEY (id),
+	INDEX (subject_id)
+);
+INSERT INTO pages (subject_id, menu_name, position, visible, content)
+	VALUES( 1, 'Our Mission', 1, 1, 'Our mission has always been…' );
+INSERT INTO pages (subject_id, menu_name, position, visible, content)
+	VALUES( 1, 'Our History', 2, 1, 'Founded in 1898 by two enterprising engineers…' );
+INSERT INTO pages (subject_id, menu_name, position, visible, content)
+	VALUES( 2, 'Large Widgets', 1, 1, 'Our large widgets have to be seen to be believed…' );
+INSERT INTO pages (subject_id, menu_name, position, visible, content)
+	VALUES( 2, 'Small Widgets', 2, 1, 'They say big things come in small packages…' );
+INSERT INTO pages (subject_id, menu_name, position, visible, content)
+	VALUES( 3, 'Retrofitting', 2, 1, 'We love to replace widgets…' );
+INSERT INTO pages (subject_id, menu_name, position, visible, content)
+	VALUES( 3, 'Certification', 2, 1, 'We can certify any widget - not just our own…' );
