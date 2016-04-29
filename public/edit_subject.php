@@ -36,7 +36,7 @@ if ( isset( $_POST[ 'submit' ] ) ) {
         $query .= "LIMIT 1";
         $result = mysqli_query( $db, $query );
 
-        if ( $result && mysqli_affected_rows( $db ) == 1 ) {
+        if ( $result && mysqli_affected_rows( $db ) >= 0 ) {
             // Success
             $_SESSION[ 'message' ] = "Subject $menu_name successfully updated!";
             redirect_to( 'manage_content.php' );
@@ -58,16 +58,16 @@ if ( isset( $_POST[ 'submit' ] ) ) {
             
             <?php 
             if ( ! empty( $message ) ) {
-                echo '<div class="message">' . $message . '</div>';
+                echo '<div class="message">' . htmlentities( $message ) . '</div>';
             }
             echo form_errors( $errors );
             ?>
             
-            <h2>Edit Subject: <?php echo $current_subject[ 'menu_name' ]; ?></h2>
+            <h2>Edit Subject: <?php echo htmlentities( $current_subject[ 'menu_name' ] ); ?></h2>
             
-            <form action="edit_subject.php?subject=<?php echo $current_subject[ 'id' ]; ?>" method="POST">
+            <form action="edit_subject.php?subject=<?php echo urlencode( $current_subject[ 'id' ] ); ?>" method="POST">
                 <label>Subject name:
-                    <input type="text" name="menu_name" value="<?php echo $current_subject[ 'menu_name' ]; ?>">
+                    <input type="text" name="menu_name" value="<?php echo htmlentities( $current_subject[ 'menu_name' ] ); ?>">
                 </label>
                 <label>Position:
                     <select name="position">
@@ -101,7 +101,7 @@ if ( isset( $_POST[ 'submit' ] ) ) {
             
             <a href="manage_content.php">Cancel</a>
             &nbsp;&nbsp;
-            <a href="delete_subject.php?subject=<?php echo $current_subject[ 'id' ]; ?>" onclick="return confirm( 'Are you sure you want to delete <?= $current_subject[ 'id' ]; ?>?' );">Delete subject</a>
+            <a href="delete_subject.php?subject=<?php echo urlencode( $current_subject[ 'id' ] ); ?>" onclick="return confirm( 'Are you sure you want to delete <?= $current_subject[ 'id' ]; ?>?' );">Delete subject</a>
             
         </div>
     </main>

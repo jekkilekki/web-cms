@@ -75,8 +75,19 @@ ul.pages {
     color: steelblue;
 }
 
+.view-content {
+    margin: 1em 0; padding: 1em; border: 1px solid silver;
+}
+
 div.message {
     border: 2px solid steelblue;
     color: steelblue; font-weight: bold;
     margin: 0; padding: 1em;
 }
+
+/* errors */
+.error {
+    color: steelblue; border: 2px solid steelblue;
+    margin: 1em 0; padding: 1em;
+}
+.error ul { padding-left: 2em; }

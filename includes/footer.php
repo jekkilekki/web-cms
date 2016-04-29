@@ -1,6 +1,6 @@
     <footer>
-        <p>&copy; 20xx, Aaron Snowberger</p>
-    </footer>
+        <p>&copy; <?php echo date( 'Y' ); ?>, Aaron Snowberger</p>
+    </footer> 
 </body>
 </html>
 
