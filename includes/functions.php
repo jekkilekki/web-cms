@@ -1,4 +1,29 @@
 <?php
+function redirect_to( $new_location ) {
+    header( "Location: " . $new_location );
+    exit;
+}
+
+function mysql_prep( $string ) {
+    global $db;
+    return mysqli_real_escape_string( $db, $string );
+}
+
+function form_errors( $errors = array() ) {
+    $output = '';
+    if ( ! empty( $errors ) ) {
+        $output .= '<div class="error">';
+        $output .= 'Please fix the following errors: ';
+        $output .= '<ul>';
+        foreach( $errors as $key => $error ) {
+            $output .= "<li>$error</li>";
+        }
+        $output .= '</ul>';
+        $output .= '</div>';
+    }
+    return $output;
+}
+
 function confirm_query( $result_set ) {
     if ( ! $result_set ) {
         die( 'Database query failed.' );

@@ -74,3 +74,9 @@ ul.pages {
 #page h3 {
     color: steelblue;
 }
+
+div.message {
+    border: 2px solid steelblue;
+    color: steelblue; font-weight: bold;
+    margin: 0; padding: 1em;
+}
