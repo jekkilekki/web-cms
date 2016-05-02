@@ -1,3 +1,5 @@
+// Use this text in phpAdmin to populate the database with a few necessary elements for this CMS
+
 CREATE TABLE subjects (
 	id INT(11) NOT NULL AUTO_INCREMENT,
 	menu_name VARCHAR(30) NOT NULL,
