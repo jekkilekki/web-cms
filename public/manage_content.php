@@ -29,6 +29,24 @@ find_selected_page();
                 echo '<br>';
                 echo '<p><a href="edit_subject.php?subject=' . urlencode( $current_subject[ 'id' ] ) . '">Edit Subject</a></p>';
                 
+                echo '<div class="pages">';
+                echo '<h3>Pages in this subject:</h3>';
+                echo '<ul>';
+                
+                $subject_pages = find_pages_for_subject( $current_subject[ 'id' ] );
+                while( $page = mysqli_fetch_assoc( $subject_pages ) ) {
+                    echo '<li>';
+                    $safe_page_id = urlencode( $page[ 'id' ] );
+                    echo '<a href="manage_content.php?page=' . $safe_page_id . '">' . htmlentities( $page[ 'menu_name' ] ) . '</a>';
+                    echo '</li>';
+                }
+                
+                echo '</ul>';
+                echo '<br>';
+                
+                echo '+ <a href="new_page.php?subject=' . urlencode( $current_subject[ 'id' ] ) . '">Add a new page to this subject</a>';
+                echo '</div>';
+                
             } elseif ( $current_page ) {
                 
                 echo '<h2>Manage Page</h2>';
@@ -37,7 +55,7 @@ find_selected_page();
                 echo "<p>Visible: " . $current_page[ 'position' ] ? 'yes' : 'no' . "</p>";
                 echo '<div class="view-content">' . htmlentities( $current_page[ 'content' ] ) . '</div>';
                 echo '<br>';
-                echo '<p><a href="edit_subject.php?subject=' . urlencode( $current_page[ 'id' ] ) . '">Edit Page</a></p>';
+                echo '<p><a href="edit_page.php?page=' . urlencode( $current_page[ 'id' ] ) . '">Edit Page</a></p>';
                 
             } else {
                 echo "Please select a subject or a page.";
