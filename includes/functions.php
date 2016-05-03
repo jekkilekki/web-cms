@@ -26,7 +26,7 @@ function form_errors( $errors = array() ) {
 
 function confirm_query( $result_set ) {
     if ( ! $result_set ) {
-        die( 'Database query failed.' );
+        die( 'Database query failed: ' . mysqli_connect_error() . ' (' . mysqli_connect_errno() . ')' );
     }
 }
 

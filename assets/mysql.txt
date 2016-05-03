@@ -1,5 +1,13 @@
 // Use this text in phpAdmin to populate the database with a few necessary elements for this CMS
 
+CREATE DATABASE jkl_web;
+
+USE jkl_web;
+
+GRANT ALL PRIVILEGES ON jkl_web.*
+    TO 'jekkilekki'@'localhost'
+    IDENTIFIED BY 'fluffh34d'; 	
+
 CREATE TABLE subjects (
 	id INT(11) NOT NULL AUTO_INCREMENT,
 	menu_name VARCHAR(30) NOT NULL,
@@ -37,3 +45,10 @@ INSERT INTO pages (subject_id, menu_name, position, visible, content)
 	VALUES( 3, 'Retrofitting', 2, 1, 'We love to replace widgets…' );
 INSERT INTO pages (subject_id, menu_name, position, visible, content)
 	VALUES( 3, 'Certification', 2, 1, 'We can certify any widget - not just our own…' );
+
+CREATE TABLE admins (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    username VARCHAR(5) NOT NULL,
+    hashed_password VARCHAR(60) NOT NULL,
+    PRIMARY KEY (id)
+);
