@@ -1,9 +1,11 @@
 <?php
 ini_set( 'display_errors', 'On' );
 require_once( '../private/session.php' );
+
+$layout_context = 'public';
 include( '../includes/header.php' );
 
-find_selected_page(); 
+find_selected_page( true ); 
 ?>
 
     <main>
@@ -13,20 +15,15 @@ find_selected_page();
         <div id="page">
             
             <?php 
-            if ( $current_subject ) {
+            if ( $current_page ) {
                 
-                echo '<h2>Manage Subject</h2>'; 
-                echo "<h4>Menu name: " . htmlentities( $current_subject[ 'menu_name' ] ) . "</h4>";
-                
-            } elseif ( $current_page ) {
-                
-                echo "<h4>" . htmlentities( $current_page[ 'menu_name' ] ) . "</h4>";
-                echo '<div class="view-content">' . htmlentities( $current_page[ 'content' ] ) . '</div>';
+                echo "<h2>" . htmlentities( $current_page[ 'menu_name' ] ) . "</h2>";
+                echo '<div class="view-content">' . nl2br( htmlentities( $current_page[ 'content' ] ) ) . '</div>';
                 echo '<br>';
                 echo '<p><a href="edit_page.php?page=' . urlencode( $current_page[ 'id' ] ) . '">Edit Page</a></p>';
                 
             } else {
-                echo "Please select a subject or a page.";
+                echo "<h1>Welcome!</h1>";
             }
             ?>
             

@@ -1,10 +1,12 @@
 <?php 
 require_once( '../private/session.php' );
 require_once( '../private/validation_functions.php' );
+
+$layout_context = 'admin';
 include( '../includes/header.php' );
 
 find_selected_page(); 
-$current_page = find_page_by_id( $_GET[ 'page' ] );
+$current_page = find_page_by_id( $_GET[ 'page' ], false );
 if ( ! $current_page ) {
     // subject ID was missing or invalid or couldn't be found in database
     redirect_to( 'manage_content.php' );
@@ -75,7 +77,7 @@ if ( isset( $_POST[ 'submit' ] ) ) {
                 <label>Position:
                     <select name="position">
                         <?php
-                        $page_set = find_pages_for_subject( $current_page[ 'subject_id' ] );
+                        $page_set = find_pages_for_subject( $current_page[ 'subject_id' ], false );
                         $spage_count = mysqli_num_rows( $page_set );
                         
                         for ( $count = 1; $count <= $page_count; $count++ ) {

@@ -1,3 +1,4 @@
+<?php $layout_context = 'admin'; ?>
 <?php include( '../includes/header.php' ); ?>
     <main>
         <nav>
