@@ -1,5 +1,6 @@
 <?php
 require_once( '../private/session.php' );
+confirm_logged_in();
 require_once( '../private/db_connection.php' );
 require_once( '../includes/functions.php' );
 require_once( '../private/validation_functions.php' );
@@ -19,22 +20,22 @@ if ( isset( $_POST[ 'submit' ] ) ) {
         
         $username = mysql_prep( $_POST[ 'username' ] );
         $hashed_password = password_encrypt( $_POST[ 'password' ] ); // our own encryption function
-    }
-    
-    $query  = "INSERT INTO admins (";
-    $query .= " username, hashed_password ";
-    $query .= ") VALUES (";
-    $query .= " '$username', '$hashed_password' ";
-    $query .= ")";
-    $result = mysqli_query( $db, $query );
-    
-    if( $result ) {
-        // Success
-        $_SESSION[ 'message' ] = "Admin created.";
-        redirect_to( 'manage_admins.php' );
-    } else {
-        // Failure
-        $_SESSION[ 'message' ] = "Admin creation failed.";
+        
+        $query  = "INSERT INTO admins (";
+        $query .= " username, hashed_password ";
+        $query .= ") VALUES (";
+        $query .= " '$username', '$hashed_password' ";
+        $query .= ")";
+        $result = mysqli_query( $db, $query );
+
+        if( $result ) {
+            // Success
+            $_SESSION[ 'message' ] = "Admin created.";
+            redirect_to( 'manage_admins.php' );
+        } else {
+            // Failure
+            $_SESSION[ 'message' ] = "Admin creation failed.";
+        }
     }
 } else {
     // This is a GET request

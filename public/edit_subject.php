@@ -1,5 +1,6 @@
 <?php 
 require_once( '../private/session.php' );
+confirm_logged_in();
 require_once( '../private/validation_functions.php' );
 
 $layout_context = 'admin';

@@ -1,7 +1,8 @@
 <?php 
 
 ini_set( 'display_errors', 'On' );
-require_once( '../private/session.php' );
+include( '../private/session.php' );
+confirm_logged_in();
 require_once( '../private/validation_functions.php' );
 
 // Open database connection

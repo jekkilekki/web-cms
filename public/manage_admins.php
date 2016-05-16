@@ -1,6 +1,7 @@
 <?php
 ini_set( 'display_errors', 'On' );
 require_once( '../private/session.php' );
+confirm_logged_in();
 
 $layout_context = 'admin';
 include( '../includes/header.php' );

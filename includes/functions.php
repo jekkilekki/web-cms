@@ -282,6 +282,26 @@ function find_admin_by_id( $admin_id ) {
     }
 }
 
+function find_admin_by_username( $username ) {
+    global $db;
+    
+    $safe_username = mysqli_real_escape_string( $db, $admin_id );
+    
+    $query  = "SELECT * ";
+    $query .= "FROM admins ";
+    $query .= "WHERE username = '$safe_username' ";
+    $query .= "LIMIT 1";
+    
+    $admin_set = mysqli_query( $db, $query );
+    confirm_query( $admin_set );
+    
+    if( $admin = mysqli_fetch_assoc( $admin_set ) ) {
+        return $admin;
+    } else {
+        return null;
+    }
+}
+
 function password_encrypt( $password ) {
     $hash_format = '$2y$10$';   // tells PHP to use Blowfish with a "cost" of 10
     $salt_length = 22;          // Blowfish salts should be 22-characters or more
@@ -315,5 +335,34 @@ function password_check( $password, $existing_hash ) {
         return true;
     } else {
         return false;
+    }
+}
+
+function attempt_login( $username, $password ) {
+    // 1. Find user
+    // 2. Find password (hashed)
+    $admin = find_user_by_username( $username );
+    if ( $admin ) {
+        // found admin, now check password
+        if ( password_check( $password, $admin[ 'hashed_password' ] ) ) {
+            // password matches
+            return $admin;
+        } else {
+            // password does not match
+            return false;
+        }
+    } else {
+        // admin not found
+        return false;
+    }
+}
+
+function logged_in() {
+    return isset( $_SESSION[ 'admin_id' ] );
+}
+
+function confirm_logged_in() {
+    if ( ! logged_in() ) {
+        redirect_to( 'login.php' );
     }
 }
